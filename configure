@@ -300,6 +300,7 @@ External library support:
   --enable-libzvbi         enable teletext support via libzvbi [no]
   --enable-lv2             enable LV2 audio filtering [no]
   --disable-lzma           disable lzma [autodetect]
+  --enable-libndi_newtek   enable Newteck NDI I/O support [no]
   --enable-decklink        enable Blackmagic DeckLink I/O support [no]
   --enable-mbedtls         enable mbedTLS, needed for https support
                            if openssl, gnutls or libtls is not used [no]
@@ -1728,6 +1729,7 @@ EXTERNAL_LIBRARY_GPL_LIST="
 
 EXTERNAL_LIBRARY_NONFREE_LIST="
     decklink
+    libndi_newtek
     libfdk_aac
     openssl
     libtls
@@ -3359,6 +3361,10 @@ avfoundation_indev_suggest="coregraphics applicationservices"
 avfoundation_indev_extralibs="-framework Foundation"
 bktr_indev_deps_any="dev_bktr_ioctl_bt848_h machine_ioctl_bt848_h dev_video_bktr_ioctl_bt848_h dev_ic_bt8xx_h"
 caca_outdev_deps="libcaca"
+libndi_newtek_indev_deps="libndi_newtek"
+libndi_newtek_indev_extralibs="-lndi"
+libndi_newtek_outdev_deps="libndi_newtek"
+libndi_newtek_outdev_extralibs="-lndi"
 decklink_deps_any="libdl LoadLibrary"
 decklink_indev_deps="decklink threads"
 decklink_indev_extralibs="-lstdc++"
@@ -6261,6 +6267,7 @@ done
 enabled avisynth          && require_headers "avisynth/avisynth_c.h"
 enabled cuda_nvcc         && { check_nvcc cuda_nvcc || die "ERROR: failed checking for nvcc."; }
 enabled chromaprint       && require chromaprint chromaprint.h chromaprint_get_version -lchromaprint
+enabled libndi_newtek     && require_headers Processing.NDI.Lib.h
 enabled decklink          && { require_headers DeckLinkAPI.h &&
                                { test_cpp_condition DeckLinkAPIVersion.h "BLACKMAGIC_DECKLINK_API_VERSION >= 0x0a090500" || die "ERROR: Decklink API version must be >= 10.9.5."; } }
 enabled frei0r            && require_headers "frei0r.h dlfcn.h"
