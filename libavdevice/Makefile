@@ -58,6 +58,8 @@ OBJS-$(CONFIG_LIBDC1394_INDEV)           += libdc1394.o
 # Windows resource file
 SLIBOBJS-$(HAVE_GNU_WINDRES)             += avdeviceres.o
 
+SKIPHEADERS-$(CONFIG_LIBNDI_NEWTEK_INDEV) += libndi_newtek_common.h
+SKIPHEADERS-$(CONFIG_LIBNDI_NEWTEK_OUTDEV) += libndi_newtek_common.h
 SKIPHEADERS                              += decklink_common.h
 SKIPHEADERS-$(CONFIG_DECKLINK)           += decklink_enc.h decklink_dec.h \
                                             decklink_common_c.h
